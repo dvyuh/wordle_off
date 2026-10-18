@@ -1,0 +1,41 @@
+import Button from "../components/Button";
+
+
+export default function Home({ onSinglePlayer }) {
+  return (
+    <div
+      style={{
+        minHeight: "100dvh",
+        padding: 24,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <img src="/title.svg" alt="Wordle Off" style={{
+            width: "min(320px, 100%)",
+            height: "auto",
+            marginTop: 80,
+            }}
+/>
+
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 320,
+          display: "flex",
+          flexDirection: "column",
+          gap: 16,
+          marginBottom: 40,
+        }}
+      >
+        <Button onClick={onSinglePlayer}>SINGLE PLAYER</Button>
+        {/*}
+        <Button disabled>1V1</Button>
+        <Button disabled>CO-OP</Button>
+        */}
+      </div>
+    </div>
+  );
+}
