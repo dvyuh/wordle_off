@@ -4,6 +4,9 @@ import CheckGuess from "../game/checkGuess";
 import Keyboard from "../components/keyboard";
 import GameOverModal from "../components/GameOverModal";
 import { pickWord, isValidWord } from "../game/wordlist";
+import Button from "../components/Button";
+
+import { loadStats, recordGame } from "../game/stats";
 
 
 export default function SinglePlayer({ onMenu }) {
@@ -11,6 +14,7 @@ export default function SinglePlayer({ onMenu }) {
   const [current, setCurrent] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [message, setMessage] = useState("");
+  const [stats, setStats] = useState(() => loadStats());
   const won = guesses.includes(secret);
   const lost = !won && guesses.length >= 6;
 
@@ -24,28 +28,27 @@ export default function SinglePlayer({ onMenu }) {
   setTimeout(() => setMessage(""), 1500);
 }
 
-  function press(key){
-    if (won || lost) return ;
+  function press(key) {
+  if (won || lost) return;
 
-      if (key === "Enter") {
-  if (current.length < 5) return;
-  if (!isValidWord(current)) {
-    toast("NOT IN WORD LIST");
-    return;
-  }
-  setGuesses([...guesses, current]);
-  setCurrent("");
-} else if(key === "Backspace"){
-        setCurrent((prev) => prev.slice(0, -1));
-      }
-      // event listener for typing letters
-      else if (/^[a-zA-Z]$/.test(key)){
-        setCurrent((prev) =>
-        prev.length < 5 ? prev + key.toUpperCase() : prev
-        );
+  if (key === "Enter") {
+    if (current.length < 5) return;
+    if (!isValidWord(current)) {
+      toast("NOT IN WORD LIST");
+      return;
     }
-
+    const newGuesses = [...guesses, current];
+    setGuesses(newGuesses);
+    setCurrent("");
+    if (current === secret || newGuesses.length >= 6) {
+      setStats(recordGame(current === secret, newGuesses.length));
+    }
+  } else if (key === "Backspace") {
+    setCurrent((prev) => prev.slice(0, -1));
+  } else if (/^[a-zA-Z]$/.test(key)) {
+    setCurrent((prev) => (prev.length < 5 ? prev + key.toUpperCase() : prev));
   }
+}
 
   useEffect(() => {
     function handleKey(e){
@@ -110,6 +113,8 @@ export default function SinglePlayer({ onMenu }) {
       <GameOverModal
         won = {won}
         secret = {secret}
+        stats = {stats}
+        guessCount = {guesses.length}
         onPlayAgain = {reset}
         onMenu = {onMenu}
       />
@@ -118,7 +123,8 @@ export default function SinglePlayer({ onMenu }) {
     </div>
     <Keyboard onPress = {press} statuses = {keyStatuses} />
     </div>
+    <Button onClick={onMenu}>MENU</Button>
     </>
-
+    
   )
 }

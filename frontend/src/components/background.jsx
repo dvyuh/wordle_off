@@ -1,11 +1,11 @@
-const LETTERS = "WORDLEOFFPLAY";
+const LETTERS = "WORDLEEVERYTHING";
 
 const TILES = Array.from({ length: 14 }, (_, i) => ({
   letter: LETTERS[i % LETTERS.length],
   left: (i * 73) % 100,
-  size: 32 + ((i * 11) % 24),
-  duration: 14 + ((i * 5) % 10),
-  delay: -((i * 3) % 14),
+  size: 48 + ((i * 11) % 24),
+  duration: 14 + ((i * 4) % 10),
+  delay: -((i * 4) % 14),
 }));
 
 export default function Background() {

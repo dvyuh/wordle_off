@@ -11,11 +11,46 @@ const buttonStyle = {
   cursor: "pointer",
 };
 
-export default function GameOverModal({ won, secret, onPlayAgain, onMenu }) {
+export default function GameOverModal({ won, secret,stats,guessCount, onPlayAgain, onMenu }) {
+  function StatsGraph({ stats, highlight }) {
+  const max = Math.max(...stats.dist, 1);
+   return (
+    <div style={{ textAlign: "left" }}>
+      <div style={{ fontSize: 16, marginBottom: 6 }}>
+        GAMES PLAYED: {stats.played} · WON: {stats.won}
+      </div>
+      {stats.dist.map((count, i) => (
+        <div
+          key={i}
+          style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}
+        >
+          <span style={{ width: 12, fontSize: 14 }}>{i + 1}</span>
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                boxSizing: "border-box",
+                width: `${Math.max((count / max) * 100, 10)}%`,
+                background: i + 1 === highlight ? COLORS.correct : COLORS.absent,
+                color: i + 1 === highlight ? "black" : "white",
+                border: "2px solid black",
+                borderRadius: 4,
+                padding: "0 6px",
+                fontSize: 14,
+                textAlign: "right",
+              }}
+            >
+              {count}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
   return (
     <div
       style={{
-
         position: "fixed",
         inset: 0,
         background: "rgba(0, 0, 0, 0.4)",
@@ -44,6 +79,7 @@ export default function GameOverModal({ won, secret, onPlayAgain, onMenu }) {
         <div style={{ fontSize: 24,fontWeight: "bold", marginBottom: 8 }}>
           THE WORD WAS {secret}
         </div>
+        <StatsGraph stats={stats} highlight={won ? guessCount : null} />
         <button
           onClick={onPlayAgain}
           style={{ ...buttonStyle,fontWeight: "bold", fontSize: 24, color:"black", background: COLORS.correct }}

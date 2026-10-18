@@ -14,11 +14,10 @@ export default function Home({ onSinglePlayer }) {
       }}
     >
       <img src="/title.svg" alt="Wordle Off" style={{
-            width: "min(320px, 100%)",
-            height: "auto",
+
+
             marginTop: 80,
-            }}
-/>
+            }} />
 
       <div
         style={{
