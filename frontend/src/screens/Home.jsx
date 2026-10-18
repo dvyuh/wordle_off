@@ -31,10 +31,9 @@ export default function Home({ onSinglePlayer }) {
         }}
       >
         <Button onClick={onSinglePlayer}>SINGLE PLAYER</Button>
-        {/*}
         <Button disabled>1V1</Button>
         <Button disabled>CO-OP</Button>
-        */}
+
       </div>
     </div>
   );

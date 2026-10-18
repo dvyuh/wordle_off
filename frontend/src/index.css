@@ -20,3 +20,11 @@ body,
   min-height: 100dvh;
   background: #72b4d6;
 }
+@keyframes float-up {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(-120vh) rotate(25deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-tile { animation: none !important; }
+}
