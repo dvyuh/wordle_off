@@ -17,6 +17,11 @@ export default function OneVsOne({ onBack }) {
       }}
     >
       <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 16 }}>
+    <div style={{ width: 120, marginBottom: 16 }}>
+        <Button onClick={onBack} style={{ padding: "8px 0", fontSize: 16 }}>
+          MENU
+        </Button>
+      </div>
         <Button onClick={() => console.log("create room")}>CREATE ROOM</Button>
 
         <div style={{ fontSize: 32, textAlign: "center" }}>OR</div>
@@ -44,7 +49,6 @@ export default function OneVsOne({ onBack }) {
         >
           ENTER ROOM
         </Button>
-        <Button onClick={onBack}>BACK</Button>
       </div>
     </div>
   );
