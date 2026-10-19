@@ -28,8 +28,6 @@ export default function Home({ onSinglePlayer, onOneVsOne }) {
       >
         <Button onClick={onSinglePlayer}>SINGLE PLAYER</Button>
         <Button onClick={onOneVsOne}>1V1</Button>
-        <Button disabled>CO-OP</Button>
-
       </div>
     </div>
   );
