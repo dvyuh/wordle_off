@@ -10,6 +10,7 @@ export default function OneVsOne({ onBack }) {
   const [error, setError] = useState("");
 
   const send = useSocket((msg) => {
+      console.log("server said:", msg);
     if (msg.type === "created") {
       setRoomCode(msg.code);
       setStage("lobby");
@@ -87,11 +88,11 @@ export default function OneVsOne({ onBack }) {
           }}
         />
 
-        {/* YOUR TURN: show the error text here when `error` isn't empty */}
+        {error && <div style={{ color: "#B00020", fontSize: 18 }}>{error}</div>}
 
         <Button
           disabled={input.length < 6}
-          onClick={() => send({ type: "join", code: input })}
+          onClick={() =>  {console.log("join clicked", input); send({ type: "join", code: input })}}
         >
           ENTER ROOM CODE
         </Button>
