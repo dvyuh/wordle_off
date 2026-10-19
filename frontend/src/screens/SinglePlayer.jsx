@@ -92,7 +92,12 @@ export default function SinglePlayer({ onMenu }) {
     {message}
   </div>
 )}
-    <div style={{ background: "#72B4D6", minHeight: "100vh", padding: 16 }}>
+    <div style={{  minHeight: "100vh", padding: 16 }}>
+    <div style={{ width: 120, marginBottom: 16 }}>
+  <Button onClick={onMenu} style={{ padding: "8px 0", fontSize: 16 }}>
+    MENU
+  </Button>
+</div>
     <div style = {{display: "flex", flexDirection: "column", gap: 8, alignItems: "center"}}>
     {[0,1,2,3,4,5].map((row) => {
       let word = "";
@@ -119,11 +124,10 @@ export default function SinglePlayer({ onMenu }) {
         onMenu = {onMenu}
       />
 )}
-
     </div>
     <Keyboard onPress = {press} statuses = {keyStatuses} />
     </div>
-    <Button onClick={onMenu}>MENU</Button>
+
     </>
     
   )

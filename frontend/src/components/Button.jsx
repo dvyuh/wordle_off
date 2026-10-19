@@ -1,4 +1,4 @@
-export default function Button({ children, onClick, disabled }) {
+export default function Button({ children, onClick, disabled,style }) {
   return (
     <button
       onClick={onClick}
@@ -15,6 +15,7 @@ export default function Button({ children, onClick, disabled }) {
         boxShadow: "4px 4px 0 black",
         opacity: disabled ? 0.5 : 1,
         cursor: disabled ? "default" : "pointer",
+        ...style
       }}
     >
       {children}

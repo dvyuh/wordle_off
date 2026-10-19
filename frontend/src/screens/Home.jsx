@@ -1,7 +1,7 @@
 import Button from "../components/Button";
 
 
-export default function Home({ onSinglePlayer }) {
+export default function Home({ onSinglePlayer, onOneVsOne }) {
   return (
     <div
       style={{
@@ -27,7 +27,7 @@ export default function Home({ onSinglePlayer }) {
         }}
       >
         <Button onClick={onSinglePlayer}>SINGLE PLAYER</Button>
-        <Button disabled>1V1</Button>
+        <Button onClick={onOneVsOne}>1V1</Button>
         <Button disabled>CO-OP</Button>
 
       </div>

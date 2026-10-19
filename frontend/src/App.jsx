@@ -2,25 +2,34 @@ import { useState} from "react";
 import Home from "./screens/Home";
 import SinglePlayer from "./screens/SinglePlayer";
 import Background from "./components/background";
-
+import OneVsOne from "./screens/OneVsOne";
 
 import './App.css'
 
 
 function App() {
   const [screen, setScreen] = useState("home");
-  return(
+
+  let content;
+  if (screen === "single") {
+    content = <SinglePlayer onMenu={() => setScreen("home")} />;
+  } else if (screen === "versus") {
+    content = <OneVsOne onBack={() => setScreen("home")} />;
+  } else {
+    content = (
+      <Home
+        onSinglePlayer={() => setScreen("single")}
+        onOneVsOne={() => setScreen("versus")}
+      />
+    );
+  }
+
+  return (
     <>
-  
-  <Background />
-    <div style={{ position: "relative", zIndex: 1 }}>
-      {screen === "single" ? (
-        <SinglePlayer onMenu={() => setScreen("home")} />
-      ) : (
-        <Home onSinglePlayer={() => setScreen("single")} />
-      )}
-    </div>
-    </>);
-};
+      <Background />
+      <div style={{ position: "relative", zIndex: 1 }}>{content}</div>
+    </>
+  );
+}
 
 export default App
